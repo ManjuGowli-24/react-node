@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import connetDB from './config/db.js'
 // import Animal from './data/Animal.js'
 import router from "./route/animalRoute.js"
+import cors from 'cors'
 
 connetDB()
 
@@ -22,6 +23,19 @@ app.get('/',(req,res)=> {
 // })
 
 app.use('/api/animal',router)
+
+// user login info
+app.post('/users/add', (req,res)=>{
+    const userInfo=req.body;
+    console.log('User Information : ', userInfo);
+})
+
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            
+    optionSuccessStatus:200,
+ }
+ app.use(cors(corsOptions))
 
 
 // PORT and NODE_ENV from .env file 
